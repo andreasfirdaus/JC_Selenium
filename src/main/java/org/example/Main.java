@@ -4,6 +4,8 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.junit.Assert;
+
 
 public class Main {
     public static void main(String[] args)
@@ -20,11 +22,12 @@ public class Main {
         driver.manage().window().maximize();
         System.out.println("layar berhasil diperbesar");
 
-       WebElement FullnameLocator = driver.findElement(By.id("userName"));
-       FullnameLocator.sendKeys("andreas firdaus qa");
+        String textPage = driver.findElement(By.className("text-center")).getText();
+        System.out.println(textPage);
 
-        WebElement EmailLocator = driver.findElement(By.id("userEmail"));
-        EmailLocator.sendKeys("aritno12@gmail.com");
+        driver.findElement(By.id("userName")).sendKeys("andreas firdaus qa");
+
+        driver.findElement(By.id("userEmail")).sendKeys("aritno12@gmail.com");
 
         WebElement TextAreaLocator = driver.findElement(By.id("currentAddress"));
         TextAreaLocator.sendKeys("LOREM");
@@ -39,7 +42,17 @@ public class Main {
         btnSubmit.click();
         delay();
         System.out.println("klik submit berhasil");
+        delay();
+        if (textPage.equalsIgnoreCase("Text Box"))
+        {
+            System.out.println("tulisan "+textPage+ " ada");
+        }else {
+            System.out.println("tulisan "+textPage+ " tidak ada");
+        }
 
+
+        driver.quit();
+        System.out.println("berhasil close browser");
     }
 
     public static void delay()
